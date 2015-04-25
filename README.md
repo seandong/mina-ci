@@ -15,10 +15,9 @@ And then execute:
 
 ## Usage
 
-    require 'mina/rollbar'
+    require 'mina/ci'
 
     ...
-    # replace value w/your real access token
     set :circle_token,    'your circle API token'
     set :circle_username, 'your circle project username'
     set :circle_project,  'your circle project'
