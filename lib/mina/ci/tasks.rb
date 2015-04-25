@@ -1,4 +1,5 @@
 require 'json'
+require 'mina/rails'
 
 # # Modules: CI
 # Adds settings and tasks for checking CircleCI status.
