@@ -24,16 +24,14 @@ set_default :circle_project,   nil
 
 namespace :ci do
 
-  desc 'Verify CircleCI building status.'
-  task :verify_status => :evironment do
-    queue %[echo "-----> check CircleCI status"]
-    die 0, 'Please set your `:circle_token`.'    unless circle_token
-    die 0, 'Please set your `:circle_username`.' unless circle_username
-    die 0, 'Please set your `:circle_project`.'  unless circle_project
+  desc 'Verify CircleCI build status.'
+  task :verify_status => :environment do
+    queue %[echo "-----> check CircleCI build status"]
+    die 0, 'Please set `:circle_token`.'     unless circle_token
+    die 0, 'Please set `:circle_username`.'  unless circle_username
+    die 0, 'Please set `:circle_project`.'   unless circle_project
 
-    unless %w(success fixed).include?(cricle_status)
-      die 1, "CircleCI not passed (#{cricle_status}), please check and fix problem first."
-    end
+    die 0, "CircleCI build failed. current status: #{cricle_status}), please check and fix it first." unless %w(success fixed).include?(cricle_status)
   end
 
   private
@@ -43,7 +41,7 @@ namespace :ci do
   end
 
   def circle_repsonse
-    JSON.parse `curl -H 'Accept: application/json' #{circle_url}`
+    JSON.parse `curl -s -H 'Accept: application/json' #{circle_url}`
   end
 
   def cricle_status
