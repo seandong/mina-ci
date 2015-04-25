@@ -17,15 +17,19 @@ require 'json'
 # Name by which CircleCI knows your project
 #
 
-set_default :circle_token,     fail('CircleCI token required')
-set_default :circle_username,  fail('CircleCI username required')
-set_default :circle_project,   fail('CircleCI project required')
+set_default :circle_token,     nil
+set_default :circle_username,  nil
+set_default :circle_project,   nil
 
 namespace :ci do
 
   desc 'Verify CircleCI building status.'
   task :verify_status => :evironment do
     queue %[echo "-----> check CircleCI status"]
+    die 0, 'Please set your `:circle_token`.'    unless circle_token
+    die 0, 'Please set your `:circle_username`.' unless circle_username
+    die 0, 'Please set your `:circle_project`.'  unless circle_project
+
     unless %w(success fixed).include?(cricle_status)
       die 1, "CircleCI not passed (#{cricle_status}), please check and fix problem first."
     end
