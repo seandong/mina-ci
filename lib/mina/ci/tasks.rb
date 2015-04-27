@@ -1,5 +1,4 @@
 require 'json'
-require 'mina/rails'
 
 # # Modules: CI
 # Adds settings and tasks for checking CircleCI status.
@@ -18,9 +17,9 @@ require 'mina/rails'
 # Name by which CircleCI knows your project
 #
 
-set_default :circle_token,     nil
-set_default :circle_username,  nil
-set_default :circle_project,   nil
+set_default :circle_token,     -> { ENV['CIRCLE_TOKEN'] }
+set_default :circle_username,  -> { ENV['CIRCLE_USERNAME'] }
+set_default :circle_project,   -> { ENV['CIRCLE_PROJECT'] }
 
 namespace :ci do
 
