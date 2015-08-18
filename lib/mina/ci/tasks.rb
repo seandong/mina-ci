@@ -36,7 +36,7 @@ namespace :ci do
   private
 
   def circle_url
-    "https://circleci.com/api/v1/project/#{circle_username}/#{circle_project}?circle-token=#{circle_token}"
+    "https://circleci.com/api/v1/project/#{circle_username}/#{circle_project}/tree/#{branch}?circle-token=#{circle_token}&limit=1"
   end
 
   def circle_repsonse
