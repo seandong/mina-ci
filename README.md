@@ -18,9 +18,10 @@ And then execute:
     require 'mina/ci'
 
     ...
-    set :circle_token,    'your circle API token'
-    set :circle_username, 'your circle project username'
-    set :circle_project,  'your circle project'
+    set :circle_token,      'your circle API token'
+    set :circle_username,   'your circle project username'
+    set :circle_project,    'your circle project'
+    set :circle_notify_url, 'notify special url if check status failed'
 
     task deploy: :environment do
       deploy do
